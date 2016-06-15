@@ -1,0 +1,19 @@
+/* ========================================================================
+ * LaraShort v0.1
+ * Copyright 2016 Saravanan Jayabalan (http://www.saravananj.com)
+ * Licensed under MIT (https://github.com/saravananj/larashort/blob/master/LICENSE)
+ * ======================================================================== */
+ @CHARSET "ISO-8859-1";
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.titleBanner {
+	margin:60px 0px;
+}
+
+.navbarIcon {
+	font-size: 20px;
+	margin-top: 4px;
+}
