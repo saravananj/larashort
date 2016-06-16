@@ -15,6 +15,10 @@ Route::get('/', "URLController@index");
 
 Route::post('/createURL', "URLController@createURL");
 
+
+//Always to be at the last
+Route::get('/{shortenedURL}', "URLController@redirectURL");
+
 // 	Route::get('/', function () {
 // 		return view('welcome');
 // 	});

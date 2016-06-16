@@ -28,7 +28,7 @@
 		
 		<br/><br/>
 		
-		<div class="alert alert-success" role="alert" id="larashortSuccess">
+		<div class="alert alert-success" role="alert" id="larashortSuccess" >
 		</div>
 		
 		<div class="alert alert-danger" role="alert" id="larashortError">

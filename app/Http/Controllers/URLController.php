@@ -8,9 +8,11 @@
 namespace App\Http\Controllers;
 
 use Request;
+use Response;
 
 use App\Http\Requests;
 use Carbon\Carbon;
+use View;
 
 use App\Helpers\URLHelper;
 use App\Url;
@@ -18,7 +20,7 @@ use App\Url;
 class URLController extends Controller
 {
     public function index() {
-    	return view("url/home");
+    	return View::make("url.home");
     }
 
     public function createURL() {
@@ -46,7 +48,34 @@ class URLController extends Controller
     	}
     	
     	$data['shortenedURL'] = url("/".$shortenedURL);
+    	$data['shortenedTitle'] = $url->title;
     	return json_encode($data);
+    }
+    
+    public function redirectURL($shortenedURL) {
+    	$input =  Request::all();
+    	
+    	if(Url::where("shortened_url",$shortenedURL)->count() == 1)
+    	{
+    		$link = Url::where("shortened_url",$shortenedURL)->first();
+    		
+    		//TODO Settings Module
+    		$settings["enable_ad"] = false;
+    		$settings["ad_display_time"] = 5;
+    		
+    		$data["link"] = $link;
+    		$data["settings"] = $settings;
+    		
+    		$link->last_used = Carbon::now();
+    		$link->save();
+    		
+    		return View::make("url.redirect",$data);
+    	}
+    	else
+    	{
+    		//TODO throw 404
+    		return Response::view('errors.404', array(), 404);
+    	}
     }
     
 }

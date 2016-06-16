@@ -23,7 +23,7 @@
 	<body>
 		<div class="container">
 			<nav class="navbar navbar-light bg-faded">
-				<a class="navbar-brand" href="#">LaraShort</a>
+				<a class="navbar-brand" href="{{ url('/') }}">LaraShort</a>
 				<div class="pull-right">
 					<ul class="nav navbar-nav">
 						<li class="nav-item">
@@ -42,10 +42,21 @@
 				</div>
 			</nav>
 			@yield('content')
+			
+			<footer>
+				<div class="row">
+					<div class="col-md-6">
+						Powered by <a href="http://saravananj.com/larashort">LaraShort</a>
+					</div>
+					<div class="col-md-6 text-right">
+						Developed by <a href="http://saravananj.com">Saravanan Jayabalan</a>
+					</div>
+			</footer>
 		</div>
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
 		<script src="{{ URL::asset('assets/js/larashort.js') }}"></script>
 	</body>
 </html>

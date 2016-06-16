@@ -17,3 +17,18 @@ body {
 	font-size: 20px;
 	margin-top: 4px;
 }
+
+#larashortSuccess,
+#larashortError {
+	display:none;
+}
+
+#larashortCopy {
+	margin-left: 20px;
+}
+
+footer {
+	margin-top:10px;
+	border-top: 1px solid #CCC;
+	padding-top: 10px;
+}
