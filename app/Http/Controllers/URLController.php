@@ -13,6 +13,7 @@ use Response;
 use App\Http\Requests;
 use Carbon\Carbon;
 use View;
+use Auth;
 
 use App\Helpers\URLHelper;
 use App\Url;
@@ -20,6 +21,13 @@ use App\Url;
 class URLController extends Controller
 {
     public function index() {
+
+		$isUserLogged = false;
+		if (Auth::check()) {
+			$isUserLogged = true;
+		}
+		//dd($isUserLogged);
+
     	return View::make("url.home");
     }
 
@@ -30,24 +38,29 @@ class URLController extends Controller
     	//TODO Settings Module
     	$settings["random_characters"] = "case_alpha_numeric"; //case_alpha_numeric, alpha_numeric, case_alpha, case_numeric
     	$settings["no_of_characters"] = 6;
+
+		$originalURL = $input["inputURL"];
+		if(Url::where("original_url",$originalURL)->count() == 1) {
+			$url = Url::where("original_url", $originalURL)->first();
+		}
+		else {
+			$isUniqueString = false;
+			while (!$isUniqueString) {
+				$shortenedURL = URLHelper::generateLink($originalURL, $settings);
+
+				if (Url::where("shortened_url", $shortenedURL)->count() == 0) {
+					$url = new Url;
+					$url->title = URLHelper::getTitle($originalURL);
+					$url->shortened_url = $shortenedURL;
+					$url->original_url = $originalURL;
+					$url->last_used = Carbon::now();
+					$url->save();
+					$isUniqueString = true;
+				}
+			}
+		}
     	
-    	$isUniqueString = false;
-    	while(!$isUniqueString) {
-    		$shortenedURL = URLHelper::generateLink($input['inputURL'], $settings);
-    		
-    		if(Url::where("shortened_url",$shortenedURL)->count() == 0)
-    		{
-	    		$url = new Url;
-	    		$url->title=URLHelper::getTitle($input["inputURL"]);
-	    		$url->shortened_url = $shortenedURL;
-	    		$url->original_url = $input["inputURL"];
-	    		$url->last_used = Carbon::now();
-	    		$url->save();
-    			$isUniqueString = true;
-    		}
-    	}
-    	
-    	$data['shortenedURL'] = url("/".$shortenedURL);
+    	$data['shortenedURL'] = url("/".$url->shortened_url);
     	$data['shortenedTitle'] = $url->title;
     	return json_encode($data);
     }

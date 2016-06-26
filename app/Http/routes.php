@@ -15,6 +15,10 @@ Route::get('/', "URLController@index");
 
 Route::post('/createURL', "URLController@createURL");
 
+Route::post('login', "Auth\AuthController@postLogin");
+Route::get('/logout', 'Auth\AuthController@getLogout');
+
+
 
 //Always to be at the last
 Route::get('/{shortenedURL}', "URLController@redirectURL");

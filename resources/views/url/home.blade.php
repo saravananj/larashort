@@ -27,7 +27,13 @@
 		</form>
 		
 		<br/><br/>
-		
+
+		@if(Auth::guest())
+			<div class="alert alert-info" role="alert">
+				<a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal">Login</a> or <a href="{{ url('register') }}">Signup</a> to track the links and access to the usage analytics
+			</div>
+		@endif
+
 		<div class="alert alert-success" role="alert" id="larashortSuccess" >
 		</div>
 		
@@ -43,9 +49,13 @@
 				</tr>
 			</thead>
 			<tbody>
+			@if(Auth::guest())
 				<tr>
-					<td colspan="3">You have no recent items</td>
+					<td colspan="3">
+						<a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal">Login</a> or <a href="{{ url('register') }}">Signup</a> to view your recent links
+					</td>
 				</tr>
+			@endif
 			</tbody>
 		</table>
 		

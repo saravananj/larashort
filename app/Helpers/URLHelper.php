@@ -36,15 +36,23 @@ class URLHelper
 	}
 	
 	public static function getTitle($url){
-		$str = file_get_contents($url);
+		$str = @file_get_contents($url);
+
 		$returnTitle = "";
-		if(strlen($str)>0){
+
+		if($str === FALSE){
+			$returnTitle = $url;
+		}
+		elseif(strlen($str)>0){
 			$str = trim(preg_replace('/\s+/', ' ', $str));
 			preg_match("/\<title\>(.*)\<\/title\>/i",$str,$title);
 			if(isset($title[1])){
 				$returnTitle = $title[1];
 			}
-			return $returnTitle;
 		}
+		else {
+			$returnTitle = $url;
+		}
+		return $returnTitle;
 	}
 }

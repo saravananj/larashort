@@ -32,12 +32,18 @@
 								<button class="btn btn-success-outline" type="submit">Search</button>
 							</form>
 						</li>
-						<li class="nav-item navbarIcon" title="My Account">
-							<i class="fa fa-user" aria-hidden="true"></i>
-						</li>
-						<li class="nav-item navbarIcon" title="Logout">
-							<i class="fa fa-sign-out" aria-hidden="true"></i>
-						</li>
+						@if(Auth::check())
+							<li class="nav-item navbarIcon" title="My Account">
+								<i class="fa fa-user" aria-hidden="true"></i>
+							</li>
+							<li class="nav-item navbarIcon" title="Logout">
+								<a href="{{ url('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+							</li>
+						@else
+							<li class="nav-item navbarIcon" title="Login / Sign Up"  data-toggle="modal" data-target="#loginModal">
+								<i class="fa fa-user" aria-hidden="true"></i>
+							</li>
+						@endif
 					</ul>
 				</div>
 			</nav>
@@ -53,6 +59,8 @@
 					</div>
 			</footer>
 		</div>
+
+		@include('partials.loginmodal')
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>

@@ -16,10 +16,12 @@ body {
 .navbarIcon {
 	font-size: 20px;
 	margin-top: 4px;
+	cursor: pointer;
 }
 
 #larashortSuccess,
-#larashortError {
+#larashortError,
+#larashortLoginError {
 	display:none;
 }
 
