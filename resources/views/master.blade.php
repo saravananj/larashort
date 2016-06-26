@@ -65,6 +65,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
+		<script src='https://www.google.com/recaptcha/api.js'></script>
 		<script src="{{ URL::asset('assets/js/larashort.js') }}"></script>
 	</body>
 </html>
